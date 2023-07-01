@@ -76,8 +76,19 @@ public class Main {
                 }
 
                 Configuracio config = new Configuracio(cap);
-                //1ForçaBruta.bruteForce(config,0,barcos,sailors);
-                Backtracking.backtracking(config,0,barcos,sailors);
+                if(cap>sailors.size()){
+                    System.out.println("No hi ha suficients navegants per ocupar tots els vaixells");
+                }else{
+                    //ForçaBruta.bruteForce(config,0,barcos,sailors);
+                    long temporal=0;
+                    long temporalSuma;
+
+                    temporal = System.nanoTime();
+                    Backtracking.backtracking(config,0,barcos,sailors);
+                    temporalSuma = (java.lang.System.nanoTime()-temporal);
+                    System.out.println(temporalSuma);
+
+                }
                 break;
             case Velocitat_BandB:
 
@@ -127,6 +138,7 @@ public class Main {
     public static void Centers(ArrayList<Centre> centres, ArrayList<String> tipus, String tipo, String nom, Barco barco){
         // Comprovar si existeixº
         Centre centre = null;
+
         for(Centre c: centres){
             if (c.getNom().equals(nom)){
                 centre = c;

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class ForçaBruta {
 
+    private static int[] mejorCombinacion;
     private static float bestVelocitat=-2000;
 
     public static void bruteForce(Configuracio configuracion, int k,  ArrayList<Barco> barcos, ArrayList<Sailor> sailors) {
@@ -96,15 +97,19 @@ public class ForçaBruta {
             }
 
 
-            velocidadTotal += barco.getVelocitatReal(barcoSailors);
+            velocidadTotal += barco.getVelocitatReal(barcoSailors,barco);
         }
 
         return velocidadTotal;
     }
     public static void tratarSolucion(Configuracio configuracion, ArrayList<Barco> barcos, ArrayList<Sailor> sailors) {
-        bestVelocitat = getVelocitatTotal(configuracion.getCombinaciones(), barcos, sailors);
-        mostrarCombinacion(configuracion.getCombinaciones(), barcos, sailors);
-
+        float velocidadTotal = getVelocitatTotal(configuracion.getCombinaciones(), barcos, sailors);
+        //mostrarCombinacion(configuracion.getCombinaciones(), barcos, sailors);
+        if (velocidadTotal > bestVelocitat) {
+            mejorCombinacion = configuracion.getCombinaciones();
+            bestVelocitat = velocidadTotal;
+            mostrarCombinacion(configuracion.getCombinaciones(), barcos, sailors);
+        }
     }
 
 }

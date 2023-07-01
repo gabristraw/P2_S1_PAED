@@ -29,21 +29,19 @@ public class Barco {
         this.centre = centre;
     }
 
-
-
     public Barco getBarco(){
         return this;
     }
 
-    public float getVelocitatReal(ArrayList<Sailor> sailors) {
-        return this.velocitat * velocitatSailors(sailors);
+    public float getVelocitatReal(ArrayList<Sailor> sailors,Barco barco){
+        return this.velocitat * velocitatSailors(sailors,barco);
     }
 
-    public float velocitatSailors(ArrayList<Sailor> sailors){
+    public float velocitatSailors(ArrayList<Sailor> sailors,Barco barco){
         float velocity=0;
 
         for(Sailor sailor: sailors){
-            velocity += sailor.getImpacteNavegant(getBarco());
+            velocity += sailor.getImpacteNavegant(barco);
         }
         return velocity;
     }

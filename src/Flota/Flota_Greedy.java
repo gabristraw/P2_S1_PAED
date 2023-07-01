@@ -12,32 +12,30 @@ public class Flota_Greedy {
 
     public static ArrayList<Centre> greedyFlota(ArrayList<Centre> centres, ArrayList<String> tipuses){
 
-        centres.sort(reverseOrder());
-
         if(!minimoTipoBarco(tipuses)){
             System.out.println("No hi ha solució possible amb el fitxer proporcionat");
             return null;
-        }
+        } else{
+            centres.sort(reverseOrder());
 
-        ArrayList<Centre> centresAgafats = new ArrayList<>();
-        for(String typeBarco : tipuses){
-            Centre centreAgafat = null;
+            ArrayList<Centre> centresAgafats = new ArrayList<>();
+            for(String typeBarco : tipuses){
+                Centre centreAgafat = null;
 
-            for (Centre centre : centres) {
-                if (centre.teTipus(typeBarco)) {
-                    centreAgafat = centre;
-                    break;
+                for (Centre centre : centres) {
+                    if (centre.teTipus(typeBarco)) {
+                        centreAgafat = centre;
+                        break;
+                    }
+                }
+                if(centreAgafat!=null){
+                    if(!centresAgafats.contains(centreAgafat)) {
+                        centresAgafats.add(centreAgafat);
+                    }
                 }
             }
-            if(centreAgafat==null){
-                return null;
-            } else {
-                if(!centresAgafats.contains(centreAgafat)) {
-                    centresAgafats.add(centreAgafat);
-                }
-            }
+            return centresAgafats;
         }
-        return centresAgafats;
     }
 
     public static boolean minimoTipoBarco(ArrayList<String> tipuses){
